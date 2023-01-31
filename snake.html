@@ -3,22 +3,23 @@
 <meta charset="utf-8" />
 <style type="text/css">
 body {text-align:center;}
-canvas { border:7px dashed #4A4747 }
+canvas { border:7px dashed #000000 }
 </style>
+<title>Snake|The Fun Zone</title>
 <script type="text/javascript">
 function play_game()
 {
 var level = 160; // Game level, by decreasing will speed up
-var rect_w = 45; // Width
-var rect_h = 30; // Height
+var rect_w = 100; // Width
+var rect_h = 50; // Height
 var inc_score = 50; // Score
-var snake_color = "#076217"; // Snake Color
+var snake_color = "#009C07"; // Snake Color
 var ctx; // Canvas attributes
 var tn = []; // temp directions storage
 var x_dir = [-1, 0, 1, 0]; // position adjusments
 var y_dir = [0, -1, 0, 1]; // position adjusments
 var queue = [];
-var frog = 1; // defalut food
+var frog = 1; // default food
 var map = [];
 var MR = Math.random;
 var X = 5 + (MR() * (rect_w - 10))|0; // Calculate positions
@@ -93,7 +94,7 @@ ctx.clearRect(dir[0] * 10, dir[1] * 10, 10, 10);
 else if (!tn.length)
 {
 var show_score = document.getElementById("show");
-show_score.innerHTML = "You lose!<br /> <u>Your Score:</u> <b>"+score+"</b><br><br> Want to try again?<br><br><input type='button' value='Play Again' onclick='window.location.reload();' />";
+show_score.innerHTML = "You lose!<br /> <u>Your Score:</u> <b>"+score+"</b><br><br> <input type='button' value='Play Again' onclick='window.location.reload();' />";
 document.getElementById("playArea").style.display = 'none';
 window.clearInterval(interval);
 }
@@ -129,8 +130,8 @@ sum+= code
 </script>
 </head>
 <body onload="play_game()" style = "background-color:lightgreen">
-<h1>Play Snake Game</h1>
+<h1>Snake</h1>
 <div id="show"></div>
-<canvas id="playArea" width="450" height="300">Sorry your browser does not support HTML5. Try using Chrome or Firefox.</canvas>
+<canvas id="playArea" width="1000" height="500">Sorry, your browser does not support HTML5. Try using Chrome or Firefox.</canvas>
 </body>
 </html>
