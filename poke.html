@@ -1,0 +1,52 @@
+<html>
+    <center><h1>Guess the Pokemon Type</h1></center>
+    <title>Guess the Pokemon Type|The Fun Zone</title>
+    <head>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    </head>
+    <body style = "background-color:lightgreen;">
+        <center>
+            <button class = "options" style = "background-color:white;">Normal</button>
+            <button class = "options" style = "background-color:red;">Fire</button>
+            <button class = "options" style = "background-color:blue;">Water</button>
+            <button class = "options" style = "background-color:green;">Grass</button>
+            <button class = "options" style = "background-color:yellow;">Electric</button>
+            <button class = "options" style = "background-color:lightblue;">Ice</button>
+            <button class = "options" style = "background-color:brown;">Fighting</button>
+            <button class = "options" style = "background-color:purple;">Poison</button>
+            <button class = "options" style = "background-color:orange;">Ground</button>
+            <button class = "options" style = "background-color:lightgray;">Flying</button>
+            <button class = "options" style = "background-color:pink;">Psychic</button>
+            <button class = "options" style = "background-color:#aaf85c;">Bug</button>
+            <button class = "options" style = "background-color:#cdb461;">Rock</button>
+            <button class = "options" style = "background-color:#540072;">Ghost</button>
+            <button class = "options" style = "background-color:black;color:white;">Dark</button>
+            <button class = "options" style = "background-color:#c000ff;">Dragon</button>
+            <button class = "options" style = "background-color:gray;">Steel</button>
+            <button class = "options" style = "background-color:#FF00FF;">Fairy</button>
+        </center>
+        <br>
+        <div id="pokemon-name"></div>
+
+        <script>
+            import axios from 'axios';
+            
+            var num = Math.floor(Math.random() * 10271) + 1
+
+            axios.get(`https://pokeapi.co/api/v2/pokemon/${num}`)
+            .then(response => {
+                document.querySelector("#pokemon-name").innerHTML = response.name;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        </script>
+        
+    </body>
+    <br><br><br><br>
+    <a href = "index.html">
+        <button>
+            Back
+        </button>
+    </a>
+</html>
