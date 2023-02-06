@@ -29,13 +29,12 @@
         <div id="pokemon-name"></div>
 
         <script>
-            import axios from 'axios';
-            
+            var axios = require('axios');
             var num = Math.floor(Math.random() * 10271) + 1
 
-            axios.get(`https://pokeapi.co/api/v2/pokemon/${num}`)
+            axios.get(`https://pokeapi.co/api/v2/pokemon/1`)
             .then(response => {
-                document.querySelector("#pokemon-name").innerHTML = response.name;
+                document.querySelector("#pokemon-name").innerHTML = response.data.name;
             })
             .catch(error => {
                 console.error(error);
