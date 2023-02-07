@@ -10,6 +10,19 @@
         <script>
         var round = 1;
         var streak = 0;
+        var cookies = document.cookie.split(";");
+        var hs = 0;
+        for (var i = 0; i < cookies.length; i++) {
+        let cookie = cookies[i].trim();
+        if (cookie.startsWith("rpsHS=")) {
+        hs = parseInt(cookie.substring(6), 7);
+        if (hs === undefined) {
+            hs = 0;
+            document.cookie = "rpsHS=" + 0 + ";expires=Fri, 01 Jan 9999 23:00:00 UTC";
+        }
+        }
+        }
+        console.log(hs);
         const options = document.querySelectorAll(".options");
         options.forEach((option) => {
             option.addEventListener("click", function () {
@@ -33,6 +46,8 @@
                 if (cInput === "Scissors") {
                     currentMatch += "player wins";
                     streak++;
+                    if (streak > hs) {
+                        document.cookie = "rpsHS=" + streak + ";expires=Fri, 01 Jan 23:00:00 UTC";
                 } else {
                     currentMatch += "computer wins";
                     streak = 0;
@@ -43,6 +58,9 @@
                 if (cInput === "Rock") {
                     currentMatch += "player wins";
                     streak++;
+                    if (streak > hs) {
+                        document.cookie = "rpsHS=" + streak + ";expires=Fri, 01 Jan 9999 23:00:00 UTC";
+                    }
                 } else {
                     currentMatch += "computer wins";
                     streak = 0;
@@ -53,6 +71,9 @@
                 if (cInput === "Paper") {
                     currentMatch += "player wins";
                     streak++;
+                    if (streak > hs) {
+                        document.cookie = "rpsHS=" + streak + ";expires=Fri, 01 Jan 9999 23:00:00 UTC";
+                    }
                 } else {
                     currentMatch += "computer wins";
                     streak = 0;
@@ -60,13 +81,17 @@
             }
             var point_count = document.getElementById("points");
             var point_tally = "Win Streak: " + streak 
+            var high = document.getElementById("highscore");
+            high.innerHTML = "High Score: " + hs;
             result.innerHTML = currentMatch;
             point_count.innerHTML = point_tally;
             round++;
         }
         </script>
-        <center><div id="hideaway"></div></center>
-        <center><div id="points"></div></center>
+        <center><div id="hideaway"></div>
+        <div id="points"></div>
+        <br>
+        <div id = "highscore"></div></center>
         <br><br><br><br><br><br><br><br>
         <a href = "index.html">
             <button>

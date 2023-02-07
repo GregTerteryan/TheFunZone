@@ -6,41 +6,47 @@
     </head>
     <body style = "background-color:lightgreen;">
         <center>
-            <button class = "options" style = "background-color:white;">Normal</button>
-            <button class = "options" style = "background-color:red;">Fire</button>
-            <button class = "options" style = "background-color:blue;">Water</button>
-            <button class = "options" style = "background-color:green;">Grass</button>
-            <button class = "options" style = "background-color:yellow;">Electric</button>
-            <button class = "options" style = "background-color:lightblue;">Ice</button>
-            <button class = "options" style = "background-color:brown;">Fighting</button>
-            <button class = "options" style = "background-color:purple;">Poison</button>
-            <button class = "options" style = "background-color:orange;">Ground</button>
-            <button class = "options" style = "background-color:lightgray;">Flying</button>
-            <button class = "options" style = "background-color:pink;">Psychic</button>
-            <button class = "options" style = "background-color:#aaf85c;">Bug</button>
-            <button class = "options" style = "background-color:#cdb461;">Rock</button>
-            <button class = "options" style = "background-color:#540072;">Ghost</button>
-            <button class = "options" style = "background-color:black;color:white;">Dark</button>
-            <button class = "options" style = "background-color:#c000ff;">Dragon</button>
-            <button class = "options" style = "background-color:gray;">Steel</button>
-            <button class = "options" style = "background-color:#FF00FF;">Fairy</button>
+            <button class = "options" style = "background-color:white;">normal</button>
+            <button class = "options" style = "background-color:red;">fire</button>
+            <button class = "options" style = "background-color:blue;">water</button>
+            <button class = "options" style = "background-color:green;">grass</button>
+            <button class = "options" style = "background-color:yellow;">electric</button>
+            <button class = "options" style = "background-color:lightblue;">ice</button>
+            <button class = "options" style = "background-color:brown;">fighting</button>
+            <button class = "options" style = "background-color:purple;">poison</button>
+            <button class = "options" style = "background-color:orange;">ground</button>
+            <button class = "options" style = "background-color:lightgray;">flying</button>
+            <button class = "options" style = "background-color:pink;">psychic</button>
+            <button class = "options" style = "background-color:#aaf85c;">bug</button>
+            <button class = "options" style = "background-color:#cdb461;">rock</button>
+            <button class = "options" style = "background-color:#540072;color:white;">ghost</button>
+            <button class = "options" style = "background-color:black;color:white;">dark</button>
+            <button class = "options" style = "background-color:#c000ff;">dragon</button>
+            <button class = "options" style = "background-color:gray;">steel</button>
+            <button class = "options" style = "background-color:#FF00FF;">fairy</button>
         </center>
         <br>
-        <div id="pokemon-name"></div>
 
         <script>
             var axios = require('axios');
             var num = Math.floor(Math.random() * 10271) + 1
 
-            axios.get(`https://pokeapi.co/api/v2/pokemon/1`)
+             axios.get(`https://pokeapi.co/api/v2/pokemon/${num}`)
             .then(response => {
-                document.querySelector("#pokemon-name").innerHTML = response.data.name;
+                document.getElementById("pokemon-name").innerHTML = response.data.name;
+                console.log(response.data.name);
             })
             .catch(error => {
                 console.error(error);
+            }); 
+            const options = document.querySelectorAll(".options");
+            options.forEach((option) => {
+                option.addEventListener("click", function () {
+                    document.getElementById("pokemon-name").innerHTML = this.textContent;
+                });
             });
         </script>
-        
+        <center><div id="pokemon-name"></div></center>
     </body>
     <br><br><br><br>
     <a href = "index.html">
