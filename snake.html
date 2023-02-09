@@ -7,6 +7,18 @@ canvas { border:7px dashed #000000 }
 </style>
 <title>Snake|The Fun Zone</title>
 <script type="text/javascript">
+let cookies = document.cookie.split(";");
+var hs = 0;
+for (var i = 0; i < cookies.length; i++) {
+    let cookie = cookies[i].trim();
+    if (cookie.startsWith("snakeHS=")) {
+        hs = parseInt(cookie.substring(8), 9);
+        if (hs === undefined || isNaN(hs)) {
+            hs = 0;
+            document.cookie = "snakeHS=" + 0 + ";expires=Fri, 01 Jan 9999 23:00:00 UTC";
+        }
+    }
+}
 function play_game()
 {
 var level = 130; // Game level, by decreasing will speed up
@@ -94,6 +106,11 @@ ctx.clearRect(dir[0] * 10, dir[1] * 10, 10, 10);
 else if (!tn.length)
 {
 var show_score = document.getElementById("show");
+if (score > hs) {
+    document.cookie = "snakeHS=" + score + ";expires=Fri, 01 Jan 23:00:00 UTC";
+}
+var HS = document.getElementById("high");
+HS.innerHTML = "High Score: " + hs;
 show_score.innerHTML = "You lose!<br /> <u>Your Score:</u> <b>"+score+"</b><br><br> <input type='button' value='Play Again' onclick='window.location.reload();' />";
 document.getElementById("playArea").style.display = 'none';
 window.clearInterval(interval);
@@ -131,6 +148,7 @@ sum+= code
 </head>
 <body onload="play_game()" style = "background-color:lightgreen">
 <h1>Snake</h1>
+<div id = "high"></div>
 <div id="show"></div>
 <canvas id="playArea" width="1000" height="500">Sorry, your browser does not support HTML5. Try using Chrome or Firefox.</canvas>
 </body>

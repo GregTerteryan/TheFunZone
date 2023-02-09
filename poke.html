@@ -2,10 +2,10 @@
     <center><h1>Guess the Pokemon Type</h1></center>
     <title>Guess the Pokemon Type|The Fun Zone</title>
     <head>
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     </head>
     <body style = "background-color:lightgreen;">
-        <center>
+        <!--<center>
             <button class = "options" style = "background-color:white;">normal</button>
             <button class = "options" style = "background-color:red;">fire</button>
             <button class = "options" style = "background-color:blue;">water</button>
@@ -24,26 +24,18 @@
             <button class = "options" style = "background-color:#c000ff;">dragon</button>
             <button class = "options" style = "background-color:gray;">steel</button>
             <button class = "options" style = "background-color:#FF00FF;">fairy</button>
-        </center>
+        </center> -->
         <br>
 
-        <script>
-            var axios = require('axios');
-            var num = Math.floor(Math.random() * 10271) + 1
-
-             axios.get(`https://pokeapi.co/api/v2/pokemon/${num}`)
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js">
+            var num = Math.floor(Math.random() * 10271) + 1;
+            var axios = window.axios;
+            axios.get(`https://pokeapi.co/api/v2/pokemon/${num}`)
             .then(response => {
                 document.getElementById("pokemon-name").innerHTML = response.data.name;
-                console.log(response.data.name);
+                
             })
             .catch(error => {
-                console.error(error);
-            }); 
-            const options = document.querySelectorAll(".options");
-            options.forEach((option) => {
-                option.addEventListener("click", function () {
-                    document.getElementById("pokemon-name").innerHTML = this.textContent;
-                });
             });
         </script>
         <center><div id="pokemon-name"></div></center>
