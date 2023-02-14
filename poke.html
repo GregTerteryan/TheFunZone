@@ -1,8 +1,9 @@
 <html>
     <center><h1>Guess the Pokemon Type</h1></center>
-    <title>Guess the Pokemon Type|The Fun Zone</title>
     <head>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <title>Guess the Pokemon Type|The Fun Zone</title>
+        <link rel="icon" type="image/x-icon" href="favicon.ico">     
     </head>
     <body style = "background-color:lightgreen;">
         <center>
@@ -16,18 +17,19 @@
             <button class = "options" style = "background-color:purple;">poison</button>
             <button class = "options" style = "background-color:orange;">ground</button>
             <button class = "options" style = "background-color:lightgray;">flying</button>
-            <button class = "options" style = "background-color:pink;">psychic</button>
+            <button class = "options" style = "background-color:#FF00FF;">psychic</button>
             <button class = "options" style = "background-color:#aaf85c;">bug</button>
             <button class = "options" style = "background-color:#cdb461;">rock</button>
-            <button class = "options" style = "background-color:#540072;color:white;">ghost</button>
+            <button class = "options" style = "background-color:#310072;color:white;">ghost</button>
             <button class = "options" style = "background-color:black;color:white;">dark</button>
             <button class = "options" style = "background-color:#c000ff;">dragon</button>
             <button class = "options" style = "background-color:gray;">steel</button>
-            <button class = "options" style = "background-color:#FF00FF;">fairy</button>
+            <button class = "options" style = "background-color:pink;">fairy</button>
         </center>
         <br>
 
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js">
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script>
             var num = Math.floor(Math.random() * 10271) + 1;
             var axios = window.axios;
             axios.get(`https://pokeapi.co/api/v2/pokemon/${num}`)
