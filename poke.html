@@ -68,6 +68,10 @@
             options.forEach((option) => {
                 option.addEventListener("click", function () {
                     input = this.textContent;
+                    checkInput();
+                    if (prevRight === 2) {
+                        getRandPokeData();
+                    }
                 });
             });
             function checkInput() {
@@ -95,6 +99,7 @@
                         else {
                             streak = 0;
                         }
+                        prevRight = 2;
                     }
                     else if (prevRight === 1) {
                         if (input === types[0]) {
@@ -107,6 +112,7 @@
                         else {
                             streak = 0;
                         }
+                        prevRight = 2;
                     }
                     else {
                         if (input === types[0]) {
