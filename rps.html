@@ -49,6 +49,7 @@
                     currentMatch += "player wins";
                     streak++;
                     if (streak > hs) {
+                        hs = streak;
                         document.cookie = "rpsHS=" + streak + ";expires=Fri, 01 Jan 23:00:00 UTC";
                     }
                 } else {
@@ -62,6 +63,7 @@
                     currentMatch += "player wins";
                     streak++;
                     if (streak > hs) {
+                        hs = streak;
                         document.cookie = "rpsHS=" + streak + ";expires=Fri, 01 Jan 9999 23:00:00 UTC";
                     }
                 } else {
@@ -75,6 +77,7 @@
                     currentMatch += "player wins";
                     streak++;
                     if (streak > hs) {
+                        hs = streak;
                         document.cookie = "rpsHS=" + streak + ";expires=Fri, 01 Jan 9999 23:00:00 UTC";
                     }
                 } else {

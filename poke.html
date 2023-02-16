@@ -1,5 +1,8 @@
 <html>
-    <center><h1>Guess the Pokemon Type</h1></center>
+    <center>
+        <h1>Guess the Pokemon Type</h1>
+        <h3>This game doesn't work on networks that block <a href = "www.pokeapi.co">pokeapi.co</a></h3>
+    </center>
     <head>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <title>Guess the Pokemon Type|The Fun Zone</title>
@@ -30,17 +33,103 @@
 
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script>
-            var num = Math.floor(Math.random() * 1008) + 1;
             var axios = window.axios;
-            axios.get(`https://pokeapi.co/api/v2/pokemon/${num}`)
-            .then(response => {
-                document.getElementById("pokemon-name").innerHTML = response.data.name;
-                
-            })
-            .catch(error => {
+            let poke;
+            let types = ["bruh", "bruh"];
+            let streak = 0;
+            let cookies = document.cookie.split(";");
+            let hs = 0;
+            let prevRight = 2;
+            let input = "bruh";
+            for (var i = 0; i < cookies.length; i++) {
+                let cookie = cookies[i].trim();
+                if (cookie.startsWith("pokeHS=")) {
+                    hs = parseInt(cookie.substring(7), 8);
+                    if (hs === undefined || isNaN(hs)) {
+                        hs = 0;
+                        document.cookie = "pokeHS=" + 0 + ";expires=Fri, 01 Jan 9999 23:00:00 UTC";
+                    }
+                }
+            }
+            getRandPokeData();
+            function getRandPokeData() {
+                var num = Math.floor(Math.random() * 1008) + 1;
+                axios.get(`https://pokeapi.co/api/v2/pokemon/${num}`)
+                .then(response => {
+                    poke = response.data;
+                    document.getElementById("pokemon-sprite").src = poke.sprites.front_default;
+                    document.getElementById("pokemon-name").innerHTML = poke.name;
+                    types = poke.types.map(type => type.type.name);
+                })
+                .catch(error => {
+                });
+            }
+            const options = document.querySelectorAll(".options");
+            options.forEach((option) => {
+                option.addEventListener("click", function () {
+                    input = this.textContent;
+                });
             });
+            function checkInput() {
+                if (types.length === 1) {
+                    if (input === types[0]) {
+                        streak++;
+                        if (streak > hs) {
+                            hs = streak;
+                            document.cookie = "pokeHS=" + streak + ";expires=Fri, 01 Jan 23:00:00 UTC";
+                        }
+                    }
+                    else {
+                        streak = 0;
+                    }
+                }
+                else {
+                    if (prevRight === 0) {
+                        if (input === types[1]) {
+                            streak++;
+                            if (streak > hs) {
+                                hs = streak;
+                                document.cookie = "pokeHS=" + streak + ";expires=Fri, 01 Jan 23:00:00 UTC";
+                            }
+                        }
+                        else {
+                            streak = 0;
+                        }
+                    }
+                    else if (prevRight === 1) {
+                        if (input === types[0]) {
+                            streak++;
+                            if (streak > hs) {
+                                hs = streak;
+                                document.cookie = "pokeHS=" + streak + ";expires=Fri, 01 Jan 23:00:00 UTC";
+                            }
+                        }
+                        else {
+                            streak = 0;
+                        }
+                    }
+                    else {
+                        if (input === types[0]) {
+                            prevRight = 0;
+                        }
+                        else if (input === types[1]) {
+                            prevRight = 1;
+                        }
+                        else {
+                            streak = 0;
+                        }
+                    }
+                }
+                document.getElementById("currStreak").innerHTML = "Streak: " + streak;
+                document.getElementById("high").innerHTML = "Highscore: " + hs;
+            }
         </script>
-        <center><div id="pokemon-name"></div></center>
+        <center>
+            <img id="pokemon-sprite"></img>
+            <div id="pokemon-name"></div>
+            <div id="currStreak"></div>
+            <div id="high"></div>
+        </center>
     </body>
     <br><br><br><br>
     <a href = "index.html">
