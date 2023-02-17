@@ -13,7 +13,7 @@ var hs = 0;
 for (var i = 0; i < cookies.length; i++) {
     let cookie = cookies[i].trim();
     if (cookie.startsWith("snakeHS=")) {
-        hs = parseInt(cookie.substring(8), 9);
+        hs = parseInt(cookie.substring(8));
         if (hs === undefined || isNaN(hs)) {
             hs = 0;
             document.cookie = "snakeHS=" + 0 + ";expires=Fri, 01 Jan 9999 23:00:00 UTC";
@@ -108,7 +108,7 @@ else if (!tn.length)
 {
 var show_score = document.getElementById("show");
 if (score > hs) {
-    document.cookie = "snakeHS=" + score + ";expires=Fri, 01 Jan 23:00:00 UTC";
+    document.cookie = "snakeHS=" + score + ";expires=Fri, 01 Jan 9999 23:00:00 UTC";
 }
 var HS = document.getElementById("high");
 HS.innerHTML = "High Score: " + hs;

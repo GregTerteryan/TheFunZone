@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
     <center>
         <h1>Guess the Pokemon Type</h1>
@@ -6,7 +7,7 @@
     <head>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <title>Guess the Pokemon Type|The Fun Zone</title>
-        <link rel="icon" type="image/x-icon" href="favicon.ico">     
+        <link rel="icon" type="image/x-icon" href="favicon.ico">   
     </head>
     <body style = "background-color:lightgreen;">
         <center>
@@ -40,14 +41,14 @@
             let cookies = document.cookie.split(";");
             let hs = 0;
             let prevRight = 2;
-            let input = "bruh";
+            let input = "bro";
             for (var i = 0; i < cookies.length; i++) {
                 let cookie = cookies[i].trim();
                 if (cookie.startsWith("pokeHS=")) {
-                    hs = parseInt(cookie.substring(7), 8);
+                    hs = parseInt(cookie.substring(7));
                     if (hs === undefined || isNaN(hs)) {
                         hs = 0;
-                        document.cookie = "pokeHS=" + 0 + ";expires=Fri, 01 Jan 9999 23:00:00 UTC";
+                        document.cookie = "pokeHS=" + hs + ";expires=Fri, 01 Jan 9999 23:00:00 UTC";
                     }
                 }
             }
@@ -80,7 +81,7 @@
                         streak++;
                         if (streak > hs) {
                             hs = streak;
-                            document.cookie = "pokeHS=" + streak + ";expires=Fri, 01 Jan 23:00:00 UTC";
+                            document.cookie = "pokeHS=" + hs + ";expires=Fri, 01 Jan 9999 23:00:00 UTC";
                         }
                     }
                     else {
@@ -93,7 +94,7 @@
                             streak++;
                             if (streak > hs) {
                                 hs = streak;
-                                document.cookie = "pokeHS=" + streak + ";expires=Fri, 01 Jan 23:00:00 UTC";
+                                document.cookie = "pokeHS=" + hs + ";expires=Fri, 01 Jan 9999 23:00:00 UTC";
                             }
                         }
                         else {
@@ -106,7 +107,7 @@
                             streak++;
                             if (streak > hs) {
                                 hs = streak;
-                                document.cookie = "pokeHS=" + streak + ";expires=Fri, 01 Jan 23:00:00 UTC";
+                                document.cookie = "pokeHS=" + hs + ";expires=Fri, 01 Jan 9999 23:00:00 UTC";
                             }
                         }
                         else {

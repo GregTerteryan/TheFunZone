@@ -18,7 +18,7 @@
         for (var i = 0; i < cookies.length; i++) {
         let cookie = cookies[i].trim();
         if (cookie.startsWith("rpsHS=")) {
-        hs = parseInt(cookie.substring(6), 7);
+        hs = parseInt(cookie.substring(6));
         if (hs === undefined || isNaN(hs)) {
             hs = 0;
             document.cookie = "rpsHS=" + 0 + ";expires=Fri, 01 Jan 9999 23:00:00 UTC";
@@ -50,7 +50,7 @@
                     streak++;
                     if (streak > hs) {
                         hs = streak;
-                        document.cookie = "rpsHS=" + streak + ";expires=Fri, 01 Jan 23:00:00 UTC";
+                        document.cookie = "rpsHS=" + streak + ";expires=Fri, 01 Jan 9999 23:00:00 UTC";
                     }
                 } else {
                     currentMatch += "computer wins";
