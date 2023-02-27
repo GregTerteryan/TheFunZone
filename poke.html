@@ -63,6 +63,7 @@
                     types = poke.types.map(type => type.type.name);
                 })
                 .catch(error => {
+                    getRandPokeData();
                 });
             }
             const options = document.querySelectorAll(".options");

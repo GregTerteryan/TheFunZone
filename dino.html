@@ -45,6 +45,17 @@
     this.distanceMeter = null;
     this.distanceRan = 0;
     this.highestScore = 0;
+    let cookies = document.cookie.split(";");
+    for (var i = 0; i < cookies.length; i++) {
+      let cookie = cookies[i].trim();
+      if (cookie.startsWith("dinoHS=")) {
+        this.highestScore = parseInt(cookie.substring(7));
+        if (this.highestScore === undefined || isNaN(this.highestScore) || this.highestScore === null) {
+          this.highestScore = 0;
+          document.cookie = "dinoHS=" + this.highestScore + ";expires=Fri, 01 Jan 9999 23:00:00 UTC";
+        }
+      }
+    }
     this.time = 0;
     this.runningTime = 0;
     this.msPerFrame = 1000 / FPS;
@@ -284,6 +295,7 @@
     // Distance meter
     this.distanceMeter = new DistanceMeter(this.canvas,
     this.images.TEXT_SPRITE, this.dimensions.WIDTH);
+    this.distanceMeter.setHighScore(this.highestScore);
     // Draw t-rex
     this.tRex = new Trex(this.canvas, this.images.TREX);
     this.outerContainerEl.appendChild(this.containerEl);
@@ -590,6 +602,7 @@
     if (this.distanceRan > this.highestScore) {
     this.highestScore = Math.ceil(this.distanceRan);
     this.distanceMeter.setHighScore(this.highestScore);
+    document.cookie = "dinoHS=" + this.highestScore + ";expires=Fri, 01 Jan 9999 23:00:00 UTC";
     }
     // Reset the time clock.
     this.time = getTimeStamp();
