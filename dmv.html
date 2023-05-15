@@ -10,7 +10,9 @@
             <div id = "question"></div><br>
             <button class = "options" id = "A">A.</button><br>
             <button class = "options" id = "B">B.</button><br>
-            <button class = "options" id = "C">C.</button>
+            <button class = "options" id = "C">C.</button><br><br><br>
+            <div id = streak></div>
+            <div id = hs></div>
         </center>
         <script>
             let streak = 0;
@@ -103,6 +105,8 @@
                     streak = 0;
                     C.style = "background-color:red";
                 }
+                document.getElementById("streak").innerHTML = "Streak: " + streak;
+                document.getElementById("hs").innerHTML = "High Score: " + hs;
             }
             
             const options = document.querySelectorAll(".options");
