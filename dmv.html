@@ -1,0 +1,101 @@
+<html>
+    <head>
+        <title>
+            CA DMV Written Exam Practice|The Fun Zone
+        </title>
+        <link rel="icon" type="image/x-icon" href="favicon.ico"> 
+    </head>
+    <body style = "background-color:lightgreen;">
+        <center>
+            <div id = "question"></div><br>
+            <button class = "options" id = "A">A.</button><br>
+            <button class = "options" id = "B">B.</button><br>
+            <button class = "options" id = "C">C.</button>
+        </center>
+        <script>
+            let input = "";
+            // Create a new XMLHttpRequest object
+            const xhr = new XMLHttpRequest();
+            let contents = "";
+            let line = "";
+            let Q = document.getElementById("question");
+            let A = document.getElementById("A");
+            let B = document.getElementById("B");
+            let C = document.getElementById("C");
+            let correct;
+            // Define a function to handle the request
+            function handleRequest() {
+                // Make a GET request to the file
+                xhr.open('GET', 'questions.csv');
+                xhr.responseType = 'text';
+                xhr.send();
+    
+                // Handle the response
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        // Read the contents of the file into a string
+                        contents = xhr.response;
+                        randQuestion();
+                    }
+                };
+            }
+            
+            handleRequest();
+            
+            function randQuestion() {
+                let lineNumber = Math.floor(Math.random() * 40) + 1;
+                line = contents.split('\n')[lineNumber];
+                setUpQ();
+            }
+            
+            function setUpQ() {
+                let question = line.substring(0, line.indexOf(","));
+                Q.innerHTML = question;
+                line = line.substring(line.indexOf(",") + 1);
+                let optA = line.substring(0, line.indexOf(","));
+                A.innerHTML = optA;
+                line = line.substring(line.indexOf(",") + 1);
+                let optB = line.substring(0, line.indexOf(","));
+                B.innerHTML = optB;
+                line = line.substring(line.indexOf(",") + 1);
+                let optC = line.substring(0, line.indexOf(","));
+                C.innerHTML = optC;
+                line = line.substring(line.indexOf(",") + 1);
+                correct = line.substring(0);
+            }
+            
+            function compareAnswer() {
+                if (correct === input) {
+                    randQuestion();
+                    A.style = "background-color:#f0f0f0";
+                    B.style = "background-color:#f0f0f0";
+                    C.style = "background-color:#f0f0f0";
+                }
+                else if (input === "A") {
+                    A.style = "background-color:red";
+                }
+                else if (input === "B") {
+                    B.style = "background-color:red";
+                }
+                else {
+                    C.style = "background-color:red";
+                }
+            }
+            
+            const options = document.querySelectorAll(".options");
+            options.forEach((option) => {
+                option.addEventListener("click", function (event) {
+                    input = event.target.id;
+                    compareAnswer();
+                });
+            });
+            
+        </script>
+    </body>
+    <br><br><br><br>
+    <a href = "index.html">
+        <button>
+            Back
+        </button>
+    </a>
+</html>
