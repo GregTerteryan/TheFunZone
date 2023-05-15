@@ -13,6 +13,21 @@
             <button class = "options" id = "C">C.</button>
         </center>
         <script>
+            let streak = 0;
+            let cookies = document.cookie.split(";");
+            let hs = 0;
+            for (var i = 0; i < cookies.length; i++) {
+                let cookie = cookies[i].trim();
+                if (cookie.startsWith("dmvHS=")) {
+                    hs = parseInt(cookie.substring(6));
+                    if (hs === undefined || isNaN(hs)) {
+                        hs = 0;
+                        document.cookie = "dmvHS=" + hs + ";expires=Fri, 01 Jan 9999 23:00:00 UTC";
+                    }
+                }
+            }
+        
+        
             let input = "";
             // Create a new XMLHttpRequest object
             const xhr = new XMLHttpRequest();
@@ -66,18 +81,26 @@
             
             function compareAnswer() {
                 if (correct === input) {
+                    streak++;
+                    if (streak > hs) {
+                        hs = streak;
+                        document.cookie = "dmvHS=" + hs + ";expires=Fri, 01 Jan 9999 23:00:00 UTC";
+                    }
                     randQuestion();
                     A.style = "background-color:#f0f0f0";
                     B.style = "background-color:#f0f0f0";
                     C.style = "background-color:#f0f0f0";
                 }
                 else if (input === "A") {
+                    streak = 0;
                     A.style = "background-color:red";
                 }
                 else if (input === "B") {
+                    streak = 0;
                     B.style = "background-color:red";
                 }
                 else {
+                    streak = 0;
                     C.style = "background-color:red";
                 }
             }
