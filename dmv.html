@@ -15,6 +15,7 @@
             <div id = hs></div>
         </center>
         <script>
+            let arr = [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1];
             let streak = 0;
             let cookies = document.cookie.split(";");
             let hs = 0;
@@ -61,6 +62,24 @@
             
             function randQuestion() {
                 let lineNumber = Math.floor(Math.random() * 40) + 1;
+                let invalid = true;
+                while (invalid) {
+                    var x = 0;
+                    for (var c = 0; c < 10; c++) {
+                        if (lineNumber === arr[c]) {
+                            break;
+                        }
+                        else {
+                            x++;
+                        }
+                    }
+                    if (x === 10) {
+                        invalid = false;
+                    }
+                    else {
+                        x = 0;
+                    }
+                }
                 line = contents.split('\n')[lineNumber];
                 setUpQ();
             }
