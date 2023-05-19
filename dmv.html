@@ -80,6 +80,10 @@
                         x = 0;
                     }
                 }
+                for (var c = 1; c < 9, c++) {
+                    arr[c-1] = arr[c];
+                }
+                arr[10] = lineNumber;
                 line = contents.split('\n')[lineNumber];
                 setUpQ();
             }
